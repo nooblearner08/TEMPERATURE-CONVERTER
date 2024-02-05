@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #converter {
+            background-color: white;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="converter">
+        <h1>Temperature Converter</h1>
+
+        <label for="temperature">Enter Temperature:</label>
+        <input type="text" id="temperature" placeholder="Enter temperature..." required>
+        
+        <br>
+        
+        <label for="unit">Choose Unit:</label>
+        <select id="unit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+
+        <button onclick="convertTemperature()">Convert</button>
+
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const temperatureInput = document.getElementById('temperature').value;
+            const unitSelect = document.getElementById('unit');
+            const selectedUnit = unitSelect.options[unitSelect.selectedIndex].value;
+            let convertedTemperature;
+
+            if (isNaN(temperatureInput)) {
+                alert("Please enter a valid number for temperature.");
+                return;
+            }
+
+            if (selectedUnit === 'celsius') {
+                convertedTemperature = (parseFloat(temperatureInput) * 9/5) + 32;
+                document.getElementById('result').innerText = `Converted Temperature: ${convertedTemperature.toFixed(2)} °F`;
+            } else if (selectedUnit === 'fahrenheit') {
+                convertedTemperature = (parseFloat(temperatureInput) - 32) * 5/9;
+                document.getElementById('result').innerText = `Converted Temperature: ${convertedTemperature.toFixed(2)} °C`;
+            } else if (selectedUnit === 'kelvin') {
+                convertedTemperature = parseFloat(temperatureInput) + 273.15;
+                document.getElementById('result').innerText = `Converted Temperature: ${convertedTemperature.toFixed(2)} K`;
+            }
+        }
+    </script>
+
+</body>
+</html>
